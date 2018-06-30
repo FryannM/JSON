@@ -63,6 +63,7 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             textViewHead  = (TextView) itemView.findViewById(R.id.Tv_Head_id);
             textViewDesc  = (TextView) itemView.findViewById(R.id.Tv_Desc);
 
+
         }
     }
 }

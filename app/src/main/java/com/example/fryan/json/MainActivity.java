@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +28,10 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private  static final String  URL_DATA ="https://simplifiedcoding.net/demos/marvel/";
+ //   private  static final String  URL_DATA ="https://simplifiedcoding.net/demos/marvel/";
+    //private  static final String  URL_DATA ="https://api.myjson.com/bins/tet1y";
+ //private  static final String  URL_DATA = (" https://api.myjson.com/bins/upyl2");
+    private  static final String  URL_DATA = ("https://api.myjson.com/bins/1c1oae");
 
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapter;
@@ -40,19 +44,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        listItemList = new ArrayList<>();
          recyclerView = (RecyclerView) findViewById(R.id.RecycleID);
          recyclerView.setHasFixedSize(true);
          recyclerView.setLayoutManager( new LinearLayoutManager(this));
-         listItemList = new ArrayList<>();
+         recyclerView.setAdapter(adapter);
+
           loadRecycleViewData();
+
 
 
     }
 
     private void  loadRecycleViewData(){
 
-        ProgressDialog progressDialog = new ProgressDialog(this);
+        final ProgressDialog progressDialog = new ProgressDialog(this);
 
         progressDialog.setMessage("Loading data......");
         progressDialog.show();
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 URL_DATA, new Response.Listener<String>() {
             @Override
             public void onResponse(String s) {
+                progressDialog.dismiss();
 
                 try {
                     JSONObject jsonObject = new JSONObject(s);
@@ -70,17 +77,17 @@ public class MainActivity extends AppCompatActivity {
                      for (int i =0; i< array.length(); i++)
                      {
                           JSONObject o =  array.getJSONObject(i);
-                          ListItem listItem = new ListItem(
-                                  o.getString("Name"),
-                                  o.getString("RealName"),
-                                  o.getString("Team"),
-                                  o.getString("Firstappearance"),
-                                  o.getString("Createdby"),
-                                  o.getString("Publisher"),
-                                  o.getString("imageurl"),
-                                  o.getString("Bio")
-                          );
+                          ListItem item = new ListItem(
+                                  o.getString("name"),
+                                  o.getString("about")
+
+
+                         );
+                          listItemList.add(item);
                      }
+
+                     adapter = new MyAdapter(listItemList,getApplicationContext());
+                    recyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -89,12 +96,16 @@ public class MainActivity extends AppCompatActivity {
             }
         }, new Response.ErrorListener() {
             @Override
+
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+                Toast.makeText(getApplicationContext(), error.getMessage(),Toast.LENGTH_LONG).show();
 
             }
         });
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-         requestQueue.add(stringRequest);
+        requestQueue.add(stringRequest);
     }
+
 }
