@@ -6,7 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -36,11 +39,17 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
      ListItem listItem = listItems.get(position);
      holder.textViewHead.setText(listItem.getHead());
      holder.textViewDesc.setText(listItem.getDesc());
+     holder.textViewTeam.setText(listItem.getTeam());
+
+
+              Picasso.get()
+             .load(listItem.getImage())
+             .into(holder.imageView);
 
 
     }
@@ -52,7 +61,9 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
 
-        public TextView textViewHead, textViewDesc;
+        public TextView textViewHead,
+                textViewDesc,textViewTeam;
+        public ImageView imageView;
 
 
 
@@ -62,6 +73,10 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
 
             textViewHead  = (TextView) itemView.findViewById(R.id.Tv_Head_id);
             textViewDesc  = (TextView) itemView.findViewById(R.id.Tv_Desc);
+            textViewTeam = (TextView) itemView.findViewById(R.id.Tv_Team);
+            imageView = (ImageView) itemView.findViewById(R.id.Image_id);
+
+
 
 
         }

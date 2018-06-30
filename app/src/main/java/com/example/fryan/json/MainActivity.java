@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
  //   private  static final String  URL_DATA ="https://simplifiedcoding.net/demos/marvel/";
     //private  static final String  URL_DATA ="https://api.myjson.com/bins/tet1y";
  //private  static final String  URL_DATA = (" https://api.myjson.com/bins/upyl2");
-    private  static final String  URL_DATA = ("https://api.myjson.com/bins/1c1oae");
+   // private  static final String  URL_DATA = ("https://api.myjson.com/bins/1c1oae");
+// private  static final String  URL_DATA =   ("https://api.myjson.com/bins/136bdi");
+    private  static final String  URL_DATA =    ("https://api.myjson.com/bins/1afsye");
 
     private RecyclerView recyclerView;
     private  RecyclerView.Adapter adapter;
@@ -79,7 +81,9 @@ public class MainActivity extends AppCompatActivity {
                           JSONObject o =  array.getJSONObject(i);
                           ListItem item = new ListItem(
                                   o.getString("name"),
-                                  o.getString("about")
+                                  o.getString("about"),
+                                  o.getString("team"),
+                                  o.getString("imageurl")
 
 
                          );

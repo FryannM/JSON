@@ -32,7 +32,23 @@
                 android:textColor="@color/colorPrimary"
                 android:text="Description"/>
 
+            <TextView
+                android:id="@+id/Tv_Team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Team"
+                android:textColor="@color/colorPrimary" />
+
+            <ImageView
+                android:id="@+id/Image_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+
         </LinearLayout>
+
+
 
     </android.support.v7.widget.CardView>
 
